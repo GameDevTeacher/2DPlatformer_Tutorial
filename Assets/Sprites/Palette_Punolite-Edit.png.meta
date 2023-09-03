@@ -128,7 +128,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Palette_Punolite-Edit_0: -1340260602270607357
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
