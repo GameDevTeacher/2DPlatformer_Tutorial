@@ -203,7 +203,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: fa15e1609a5d544f2a590ce8ecb4eab7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.45
+      value: -3.7
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: fa15e1609a5d544f2a590ce8ecb4eab7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -269,17 +269,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 268064378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5aa889a3481f4b77bd57608e04bd2ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 88a5e26fce8ae47ceb6609c7f3e3117b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpSpeed: 14
+  jumpSpeed: 7
+  isPlayerGrounded: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  gravityScale: 1
-  colliderSize: {x: 0.35, y: 0.58}
-  colliderOffset: {x: -0.03, y: 0.29}
 --- !u!70 &268064380
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -343,7 +341,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
