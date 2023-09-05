@@ -6,9 +6,9 @@ public class InputManager : MonoBehaviour
     public bool jumpPressed;
     public bool jumpReleased;
     public bool jumpHeld;
-
+    
     public Vector2 moveVector;
-
+    
     private void Update()
     {
         moveVector.x = (Keyboard.current.dKey.isPressed ? 1 : 0) + (Keyboard.current.aKey.isPressed ? -1 : 0);
