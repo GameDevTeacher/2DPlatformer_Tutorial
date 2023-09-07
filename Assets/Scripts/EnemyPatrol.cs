@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -22,6 +23,14 @@ public class EnemyPatrol : MonoBehaviour
             transform.localScale = new Vector3(
                 -transform.localScale.x, 1f, 1f);
         }
+        
+        if (DetectedPlayer())
+        {
+            SceneManager.LoadScene(
+                SceneManager.GetActiveScene().name);
+            //Application.Quit();
+        }
+
     }
     
     private bool DetectedWallOrFall()
