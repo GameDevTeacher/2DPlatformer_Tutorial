@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5406047663034380616
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 738586240550485188}
+  m_Layer: 6
+  m_Name: FallCheckPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &738586240550485188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406047663034380616}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.6, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8003333712896810768}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &163264575434072093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42,11 +73,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: f4aa55a796b894ef09edd1726c935b84, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.235
+      value: -2.008
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: f4aa55a796b894ef09edd1726c935b84, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.2478
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: f4aa55a796b894ef09edd1726c935b84, type: 3}
       propertyPath: m_LocalPosition.z
@@ -82,7 +113,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 7878350319992209165, guid: f4aa55a796b894ef09edd1726c935b84, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 738586240550485188}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2253911629886400664, guid: f4aa55a796b894ef09edd1726c935b84, type: 3}
       insertIndex: -1
@@ -115,6 +149,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  fallCheckPoint: {fileID: 738586240550485188}
 --- !u!50 &3728620065386258039
 Rigidbody2D:
   serializedVersion: 4
@@ -141,7 +176,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &8563728792218853338
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,3 +223,8 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.7022345, y: 0.7532632}
   m_EdgeRadius: 0
+--- !u!4 &8003333712896810768 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: f4aa55a796b894ef09edd1726c935b84, type: 3}
+  m_PrefabInstance: {fileID: 163264575434072093}
+  m_PrefabAsset: {fileID: 0}

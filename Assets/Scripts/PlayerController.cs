@@ -1,5 +1,5 @@
-using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -49,5 +49,18 @@ public class PlayerController : MonoBehaviour
         Destroy(hit.transform.gameObject); 
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpSpeed/1.3f);
     }
-    
+
+    private void OnTriggerEnter2D(Collider2D coll)
+    {
+        if (coll.transform.CompareTag("Death"))
+        {
+            SceneManager.LoadScene(
+                SceneManager.GetActiveScene().name);
+        }
+
+        if (coll.transform.CompareTag("Goal"))
+        {
+            SceneManager.LoadScene("WinScene");
+        }
+    }
 }
