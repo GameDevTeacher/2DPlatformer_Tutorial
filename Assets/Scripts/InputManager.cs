@@ -1,36 +1,41 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 public class InputManager : MonoBehaviour
 {
    
     [Header("Movement")]
+// This variable is used to hold the Input value from WASD, Dpad or Left Stick
     [HideInInspector] public Vector2 moveVector;
 
     [Header("Jump")]
+    
     [HideInInspector] public bool canJump;
+// These variables are used to hold Input values from Spacebar or South button
     [HideInInspector] public bool jumpPressed, jumpReleased, jumpHeld;
 
     [Header("Interact")]
     [HideInInspector] public bool canInteract;
+// These variables are used to hold Input Values from the F key or East Button
     [HideInInspector] public bool interactPressed, interactReleased, interactHeld;
 
-    private bool _usingGamepad;
-    private bool _usingDpad;
-        
+// These variables are used to determine input source.
+    private bool _usingGamepad, _usingDpad;
+
+// These variables are used to hold the current Input source
     private Keyboard _keyboard;
     private Gamepad _gamepad;
 
     private void Start()
     {
+    //Assign Input Sources to Variables
         _keyboard = Keyboard.current;
         _gamepad = Gamepad.current;
     }
 
     private void Update()
     {
+    // Check whether we are using Gamepad or Keyboard
         if (_usingGamepad)
         {
             UpdateGamepadInput();  
@@ -50,9 +55,9 @@ public class InputManager : MonoBehaviour
         jumpReleased = _keyboard.spaceKey.wasReleasedThisFrame;
         jumpHeld = _keyboard.spaceKey.isPressed;
         
-        jumpPressed = _keyboard.spaceKey.wasPressedThisFrame;
-        jumpReleased = _keyboard.spaceKey.wasReleasedThisFrame;
-        jumpHeld = _keyboard.spaceKey.isPressed;
+        interactPressed = _keyboard.fKey.wasPressedThisFrame;
+        interactReleased = _keyboard.fKey.wasReleasedThisFrame;
+        interactHeld = _keyboard.fKey.isPressed;
     }
     
     private void UpdateGamepadInput()
@@ -71,9 +76,9 @@ public class InputManager : MonoBehaviour
         jumpReleased = _gamepad.buttonSouth.wasReleasedThisFrame;
         jumpHeld = _gamepad.buttonSouth.isPressed;
         
-        jumpPressed = _gamepad.buttonSouth.wasPressedThisFrame;
-        jumpReleased = _gamepad.buttonSouth.wasReleasedThisFrame;
-        jumpHeld = _gamepad.buttonSouth.isPressed;
+        interactPressed = _gamepad.buttonEast.wasPressedThisFrame;
+        interactReleased = _gamepad.buttonEast.wasReleasedThisFrame;
+        interactHeld = _gamepad.buttonEast.isPressed;
     }
 
   

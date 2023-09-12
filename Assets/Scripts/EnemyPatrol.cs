@@ -30,6 +30,7 @@ public class EnemyPatrol : MonoBehaviour
         if (DetectedPlayer())
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            // Injure Player
         }
     }
     

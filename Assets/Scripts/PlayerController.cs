@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private void Attack()
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.01f);
+        
         if (hit.collider == null) return;
         if (!hit.collider.CompareTag("Enemy")) return;
         
