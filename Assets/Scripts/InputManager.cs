@@ -3,10 +3,9 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-   
     [Header("Movement")]
 // This variable is used to hold the Input value from WASD, Dpad or Left Stick
-    [HideInInspector] public Vector2 moveVector;
+    [HideInInspector] public Vector2 moveDirection;
 
     [Header("Jump")]
     
@@ -20,7 +19,7 @@ public class InputManager : MonoBehaviour
     [HideInInspector] public bool interactPressed, interactReleased, interactHeld;
 
 // These variables are used to determine input source.
-    private bool _usingGamepad, _usingDpad;
+    [SerializeField] private bool usingGamepad, usingDpad;
 
 // These variables are used to hold the current Input source
     private Keyboard _keyboard;
@@ -36,7 +35,7 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
     // Check whether we are using Gamepad or Keyboard
-        if (_usingGamepad)
+        if (usingGamepad && _gamepad != null)
         {
             UpdateGamepadInput();  
         }
@@ -48,13 +47,14 @@ public class InputManager : MonoBehaviour
     
     private void UpdateKeyboardInput()
     {
-        moveVector.x = (_keyboard.dKey.isPressed ? 1 : 0) + (_keyboard.aKey.isPressed ? -1 : 0);
-        moveVector.y = (_keyboard.wKey.isPressed ? 1 : 0) + (_keyboard.sKey.isPressed ? -1 : 0);
-        
+    // Set the value of moveDirection to be equal to the value of wasd
+        moveDirection.x = (_keyboard.dKey.isPressed ? 1 : 0) + (_keyboard.aKey.isPressed ? -1 : 0);
+        moveDirection.y = (_keyboard.wKey.isPressed ? 1 : 0) + (_keyboard.sKey.isPressed ? -1 : 0);
+    // Set the jump bools when spacebar is interacted with
         jumpPressed = _keyboard.spaceKey.wasPressedThisFrame;
         jumpReleased = _keyboard.spaceKey.wasReleasedThisFrame;
-        jumpHeld = _keyboard.spaceKey.isPressed;
-        
+        jumpHeld = _keyboard.spaceKey.isPressed; 
+    // Set the interact bools when the f key is interacted with
         interactPressed = _keyboard.fKey.wasPressedThisFrame;
         interactReleased = _keyboard.fKey.wasReleasedThisFrame;
         interactHeld = _keyboard.fKey.isPressed;
@@ -62,14 +62,14 @@ public class InputManager : MonoBehaviour
     
     private void UpdateGamepadInput()
     {
-        if (_usingDpad)
+        if (usingDpad)
         {
-            moveVector.x = (_gamepad.dpad.right.isPressed ? 1 : 0) + (_gamepad.dpad.right.isPressed ? -1 : 0);
-            moveVector.y = (_gamepad.dpad.right.isPressed ? 1 : 0) + (_gamepad.dpad.right.isPressed ? -1 : 0); 
+            moveDirection.x = (_gamepad.dpad.right.isPressed ? 1 : 0) + (_gamepad.dpad.right.isPressed ? -1 : 0);
+            moveDirection.y = (_gamepad.dpad.right.isPressed ? 1 : 0) + (_gamepad.dpad.right.isPressed ? -1 : 0); 
         }
         else
         {
-            moveVector = _gamepad.leftStick.ReadValue();
+            moveDirection = _gamepad.leftStick.ReadValue();
         }
     
         jumpPressed = _gamepad.buttonSouth.wasPressedThisFrame;

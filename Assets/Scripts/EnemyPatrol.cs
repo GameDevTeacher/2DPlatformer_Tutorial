@@ -7,24 +7,35 @@ public class EnemyPatrol : MonoBehaviour
     public float moveSpeed = 4f;
     public LayerMask whatIsGround;
     public LayerMask whatIsPlayer;
-    [SerializeField] private Transform fallCheckPoint;
+
+    private Vector2 _position;
+    private Vector2 _scale;
+    
+    private Transform _fallCheckPoint;
     private Rigidbody2D _rigidbody2D;
 
     private void Start()
-    { _rigidbody2D = GetComponent<Rigidbody2D>(); }
-    
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _fallCheckPoint = GetComponentInChildren<Transform>();
+    }
+
+    private void Update()
+    {
+        _position = transform.position;
+        _scale = transform.localScale;
+    }
+
     private void FixedUpdate()
-    { _rigidbody2D.velocity = new Vector2(
-        moveSpeed * transform.localScale.x, 
-        _rigidbody2D.velocity.y); 
+    { 
+        _rigidbody2D.velocity = new Vector2(moveSpeed * _scale.x, _rigidbody2D.velocity.y); 
     }
 
     private void LateUpdate()
     {
         if (DetectedWallOrFall())
         {
-            transform.localScale = new Vector3(
-                -transform.localScale.x, 1f, 1f);
+            _scale = new Vector3(-_scale.x, 1f, 1f);
         }
 
         if (DetectedPlayer())
@@ -37,17 +48,17 @@ public class EnemyPatrol : MonoBehaviour
     private bool DetectedWallOrFall()
     {
         // Origin, Direction, Distance, PhysicsLayer
-        return Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y + 0.2f), Vector2.left * transform.localScale, 0.6f, whatIsGround) || !Physics2D.Raycast(fallCheckPoint.position, Vector2.down, 0.6f, whatIsGround);
+        return Physics2D.Raycast(new Vector2(_position.x, _position.y + 0.2f), Vector2.left * _scale, 1f, whatIsGround) || !Physics2D.Raycast(_fallCheckPoint.position, Vector2.down, 1.4f, whatIsGround);
     }
 
     private bool DetectedPlayer()
     {
         return
-            Physics2D.OverlapBox(new Vector2((transform.position.x+0.2f)* 
-            transform.localScale.x, transform.position.y + 0.3f)
-            ,transform.localScale, 0f, whatIsPlayer)
+            Physics2D.OverlapBox(new Vector2((_position.x+0.2f)* 
+            _scale.x, _position.y + 0.3f)
+            ,_scale, 0f, whatIsPlayer)
             || 
-            Physics2D.OverlapBox(new Vector2(transform.position.x, transform.position.y + 0.3f)
-            ,transform.localScale, 0f, whatIsPlayer);
+            Physics2D.OverlapBox(new Vector2(_position.x, _position.y + 0.3f)
+            ,_scale, 0f, whatIsPlayer);
     }
 }

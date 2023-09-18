@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
-    public float jumpSpeed = 7f;
+    public float jumpSpeed = 12f;
+    private Vector2 _desiredVelocity;
 
     public bool isPlayerGrounded;
     public LayerMask whatIsGround;
@@ -20,29 +21,34 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        isPlayerGrounded = Physics2D.Raycast(transform.position, Vector2.down, 0.01f, whatIsGround);
+        _desiredVelocity = _rigidbody2D.velocity;
+        isPlayerGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, whatIsGround);
 
         Attack();
         
         if (_input.jumpPressed && isPlayerGrounded)
         {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpSpeed);
+            //_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpSpeed);
+            _desiredVelocity.y = jumpSpeed;
         }
         
         if (_input.jumpReleased && _rigidbody2D.velocity.y > 0f)
         {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y * 0.2f);
+            //_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y * 0.2f);
+            _desiredVelocity.y *= 0.5f;
         }
+
+        _rigidbody2D.velocity = _desiredVelocity;
     }
     
     private void FixedUpdate()
     {
-        _rigidbody2D.velocity = new Vector2(_input.moveVector.x * moveSpeed, _rigidbody2D.velocity.y);
+        _rigidbody2D.velocity = new Vector2(_input.moveDirection.x * moveSpeed, _rigidbody2D.velocity.y);
     }
 
     private void Attack()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.01f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.1f);
         
         if (hit.collider == null) return;
         if (!hit.collider.CompareTag("Enemy")) return;
