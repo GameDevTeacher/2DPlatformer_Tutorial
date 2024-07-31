@@ -28,7 +28,7 @@ public class EnemyPatrol : MonoBehaviour
 
     private void FixedUpdate()
     { 
-        _rigidbody2D.velocity = new Vector2(moveSpeed * _scale.x, _rigidbody2D.velocity.y); 
+        _rigidbody2D.linearVelocity = new Vector2(moveSpeed * _scale.x, _rigidbody2D.linearVelocity.y); 
     }
 
     private void LateUpdate()
@@ -60,5 +60,16 @@ public class EnemyPatrol : MonoBehaviour
             || 
             Physics2D.OverlapBox(new Vector2(_position.x, _position.y + 0.3f)
             ,_scale, 0f, whatIsPlayer);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Draw a yellow cube at the transform position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(new Vector2((_position.x+0.2f)* 
+                                        _scale.x, _position.y + 0.3f), _scale);
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector2(_position.x, _position.y + 0.3f), _scale);
     }
 }

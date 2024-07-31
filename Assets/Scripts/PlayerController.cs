@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        _desiredVelocity = _rigidbody2D.velocity;
+        _desiredVelocity = _rigidbody2D.linearVelocity;
         isPlayerGrounded = Physics2D.Raycast(transform.position, Vector2.down, 1.1f, whatIsGround);
 
         Attack();
@@ -32,18 +32,18 @@ public class PlayerController : MonoBehaviour
             _desiredVelocity.y = jumpSpeed;
         }
         
-        if (_input.jumpReleased && _rigidbody2D.velocity.y > 0f)
+        if (_input.jumpReleased && _rigidbody2D.linearVelocity.y > 0f)
         {
             //_rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, _rigidbody2D.velocity.y * 0.2f);
             _desiredVelocity.y *= 0.5f;
         }
 
-        _rigidbody2D.velocity = _desiredVelocity;
+        _rigidbody2D.linearVelocity = _desiredVelocity;
     }
     
     private void FixedUpdate()
     {
-        _rigidbody2D.velocity = new Vector2(_input.moveDirection.x * moveSpeed, _rigidbody2D.velocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_input.moveDirection.x * moveSpeed, _rigidbody2D.linearVelocity.y);
     }
 
     private void Attack()
@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
         if (!hit.collider.CompareTag("Enemy")) return;
         
         Destroy(hit.transform.gameObject); 
-        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpSpeed/1.3f);
+        _rigidbody2D.linearVelocity = new Vector2(_rigidbody2D.linearVelocity.x, jumpSpeed/1.3f);
     }
 
     private void OnTriggerEnter2D(Collider2D coll)

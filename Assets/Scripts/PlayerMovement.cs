@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _desiredVelocity = _rigidbody2D.velocity;
+        _desiredVelocity = _rigidbody2D.linearVelocity;
 
 
         if (_input.jumpPressed && IsPlayerGrounded())
@@ -37,12 +37,12 @@ public class PlayerMovement : MonoBehaviour
             _desiredVelocity.y *= 0.5f;
         }
 
-        _rigidbody2D.velocity = _desiredVelocity;
+        _rigidbody2D.linearVelocity = _desiredVelocity;
     }
     
     private void FixedUpdate()
     {
-        _rigidbody2D.velocity = new Vector2(_input.moveDirection.x * moveSpeed, _rigidbody2D.velocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_input.moveDirection.x * moveSpeed, _rigidbody2D.linearVelocity.y);
     }
 
     private bool IsPlayerGrounded()
