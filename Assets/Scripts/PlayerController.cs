@@ -86,10 +86,10 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdateMovement()
     {
         
-        _rigidbody2D.velocity = new Vector2(_moveVector.x * moveSpeed, _rigidbody2D.velocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_moveVector.x * moveSpeed, _rigidbody2D.linearVelocity.y);
         if (!IsPlayerGrounded()) return;
         if (!_canJump) return;
-        _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpSpeed);
+        _rigidbody2D.linearVelocity = new Vector2(_rigidbody2D.linearVelocity.x, jumpSpeed);
         _canJump = false;
     }
 
@@ -110,7 +110,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _animator.Play(_rigidbody2D.velocity.y < 0 ? FallAnimation : JumpAnimation);
+            _animator.Play(_rigidbody2D.linearVelocity.y < 0 ? FallAnimation : JumpAnimation);
         }
     }
 
