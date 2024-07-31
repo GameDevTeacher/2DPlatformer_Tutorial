@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
-            _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpSpeed);
+            _rigidbody2D.linearVelocity = new Vector2(_rigidbody2D.linearVelocity.x, jumpSpeed);
         }
         
         //Step 3
@@ -46,6 +46,6 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Step 1
-        _rigidbody2D.velocity = new Vector2(_horizontalInput * moveSpeed, _rigidbody2D.velocity.y);
+        _rigidbody2D.linearVelocity = new Vector2(_horizontalInput * moveSpeed, _rigidbody2D.linearVelocity.y);
     }
 }

@@ -18,7 +18,7 @@ namespace TestEnvironment
         
         private void FixedUpdate()
         {
-            _rigidbody2D.velocity = new Vector2(_input.MoveVector.x * _moveSpeed, 0f);
+            _rigidbody2D.linearVelocity = new Vector2(_input.MoveVector.x * _moveSpeed, 0f);
         }
     }
  
